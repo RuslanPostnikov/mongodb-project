@@ -21,7 +21,7 @@ exports.registerValidators = [
     body('confirm')
         .custom((value, {req}) => {
         if(value !== req.body.password) {
-            throw new Error('Пароли должны совптадать')
+            throw new Error('Пароли должны совпадать')
         }
         return true
     })
@@ -29,4 +29,11 @@ exports.registerValidators = [
     body('name')
         .isLength({min: 3}).withMessage('Имя должно быть минимум 3 символа')
         .trim()
+];
+
+exports.courseValidators = [
+    body('title').isLength({min: 3}).withMessage('Минимальная длина название 3 символа')
+        .trim(),
+    body('price').isNumeric().withMessage('Введите корректную цену'),
+    body('img', 'Введите корректный Url картинки').isURL()
 ]
